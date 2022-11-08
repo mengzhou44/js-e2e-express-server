@@ -27,14 +27,14 @@ jobs:
  
    - task: CopyFiles@2
     inputs:
-      sourceFolder: '$(Build.SourcesDirectory)'
+      sourceFolder: $(Build.SourcesDirectory)
       contents: 'package.json' 
       targetFolder: $(Build.StagingDirectory)
     displayName: 'Copy package.json'
 
    - task: CopyFiles@2
     inputs:
-      sourceFolder: '$(Build.SourcesDirectory)'
+      sourceFolder: $(Build.SourcesDirectory)
       contents: 'package-lock.json' 
       targetFolder: $(Build.StagingDirectory)
     displayName: 'Copy package-lock.json'
@@ -44,11 +44,11 @@ jobs:
       sourceFolder: '$(Build.SourcesDirectory)/dist'
       contents: '**/dist/**' 
       targetFolder: '$(Build.StagingDirectory)/dist'
-    displayName: 'Copy Code'
+    displayName: 'Copy dist folder'
     
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.StagingDirectory)'
+      rootFolderOrFile: $(Build.StagingDirectory)
       includeRootFolder: false 
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(ENVIRONMENT)-$(releaseDate)-$(Build.BuildId).zip' 
