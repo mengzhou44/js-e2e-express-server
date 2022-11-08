@@ -25,10 +25,31 @@ jobs:
       npm run build
     displayName: 'Install dependencies and run build'
  
+   - task: CopyFiles@2
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)'
+      contents: 'package.json' 
+      targetFolder: $(Build.StagingDirectory)
+    displayName: 'Copy package.json'
+
+   - task: CopyFiles@2
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)'
+      contents: 'package-lock.json' 
+      targetFolder: $(Build.StagingDirectory)
+    displayName: 'Copy package-lock.json'
+
+  - task: CopyFiles@2
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)/dist'
+      contents: '**/dist/**' 
+      targetFolder: '$(Build.StagingDirectory)/dist'
+    displayName: 'Copy Code'
+    
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)/dist'
-      includeRootFolder: true 
+      rootFolderOrFile: '$(Build.StagingDirectory)'
+      includeRootFolder: false 
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(ENVIRONMENT)-$(releaseDate)-$(Build.BuildId).zip' 
     displayName: 'Create build artifacts'
@@ -36,5 +57,6 @@ jobs:
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
-      artifactName: app
+      artifactName: seaboard-api
     displayName: 'Publish build artifact'
+  
