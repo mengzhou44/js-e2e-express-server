@@ -11,8 +11,8 @@ pool:
 
 variables:
   outputFolder: $(Build.SourcesDirectory)/dist,
-  releaseDate:  $[format('{0:yyyy-MM-dd}', pipeline.startTime)]
-  
+  releaseDate:  $[format('{0:yyyyMMdd}', pipeline.startTime)]
+
 jobs:
 - job: build
   steps:
