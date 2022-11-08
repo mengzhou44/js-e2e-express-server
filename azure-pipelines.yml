@@ -11,6 +11,7 @@ pool:
 
 variables:
   releaseDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
+  outputFolder: '$(Build.SourcesDirectory)/output'
 
 jobs:
 - job: build
@@ -29,26 +30,26 @@ jobs:
     inputs:
       sourceFolder: $(Build.SourcesDirectory)
       contents: 'package.json' 
-      targetFolder: $(Build.StagingDirectory)
+      targetFolder: $(outputFolder)
     displayName: 'Copy package.json'
 
   - task: CopyFiles@2
     inputs:
       sourceFolder: $(Build.SourcesDirectory)
       contents: 'package-lock.json' 
-      targetFolder: $(Build.StagingDirectory)
+      targetFolder: $(outputFolder)
     displayName: 'Copy package-lock.json'
 
   - task: CopyFiles@2
     inputs:
       sourceFolder: $(Build.SourcesDirectory)
       contents: '**/dist/**' 
-      targetFolder: $(Build.StagingDirectory)
+      targetFolder: $(outputFolder)
     displayName: 'Copy dist fles'
     
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: $(Build.StagingDirectory)
+      rootFolderOrFile: $(outputFolder)
       includeRootFolder: false 
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(ENVIRONMENT)-$(releaseDate)-$(Build.BuildId).zip' 
