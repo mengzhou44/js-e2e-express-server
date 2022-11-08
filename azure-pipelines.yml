@@ -11,7 +11,7 @@ pool:
 
 variables:
   outputFolder: $(Build.SourcesDirectory)/dist,
-  releaseDate:  $[format('{0:yyyyMMdd}', pipeline.startTime)]
+  releaseDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
 
 jobs:
 - job: build
@@ -31,7 +31,7 @@ jobs:
       rootFolderOrFile: $(outputFolder)
       includeRootFolder: true 
       archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(ENVIRONMENT)-$(releaseDate)-$(Build.BuildId).zip' 
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(ENVIRONMENT)-$(Build.BuildId).zip' 
     displayName: 'Create build artifacts'
   
   - task: PublishPipelineArtifact@1
