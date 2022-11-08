@@ -10,8 +10,8 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  releaseDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
-
+  releaseDate: $[format('{0:yyyyMMdd}', new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }))]
+  
 jobs:
 - job: build
   steps:
