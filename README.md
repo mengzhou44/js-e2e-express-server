@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/mengazure/node-example/_apis/build/status/mengzhou44.js-e2e-express-server?branchName=master)](https://dev.azure.com/mengazure/node-example/_build/latest?definitionId=6&branchName=master)
+
 ---
 page_type: sample
 languages:
