@@ -42,10 +42,10 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      sourceFolder: $(Build.SourcesDirectory)
-      contents: '**/dist/**' 
-      targetFolder: $(outputFolder)
-    displayName: 'Copy dist fles'
+      sourceFolder: '$(Build.SourcesDirectory)/dist'
+      contents: '**' 
+      targetFolder: '$(outputFolder)/dist'
+    displayName: 'Copy dist files'
     
   - task: ArchiveFiles@2
     inputs:
