@@ -10,9 +10,8 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  outputFolder: $(Build.SourcesDirectory)/dist,
   releaseDate: $[format('{0:yyyyMMdd}', pipeline.startTime)]
-
+  
 jobs:
 - job: build
   steps:
@@ -28,7 +27,7 @@ jobs:
  
   - task: ArchiveFiles@2
     inputs:
-      rootFolderOrFile: $(outputFolder)
+      rootFolderOrFile: '$(Build.SourcesDirectory)/dist'
       includeRootFolder: true 
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(ENVIRONMENT)-$(Build.BuildId).zip' 
