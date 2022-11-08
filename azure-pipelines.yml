@@ -9,29 +9,32 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  outputFolder: $(Build.SourcesDirectory)/dist
+
 jobs:
 - job: build
   steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: '10.x'
+      versionSpec: '14.x'
     displayName: 'Install Node.js'
 
   - script: |
       npm install
       npm run build
     displayName: 'npm install and build'
-
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: '$(Build.SourcesDirectory)'
-      contents: '**/dist/**' 
-      targetFolder: $(Build.ArtifactStagingDirectory)
-    displayName: 'Copy Build'
  
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: $(outputFolder)
+      includeRootFolder: true 
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
+    displayName: 'create build artifacts'
+  
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
       artifactName: app
     displayName: 'Publish build artifact'
-    
