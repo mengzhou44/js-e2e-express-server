@@ -26,12 +26,12 @@ jobs:
     inputs:
       sourceFolder: '$(Build.SourcesDirectory)'
       contents: './dist' 
-      targetFolder: $(Build.ArtifactStagingDirectory)/npm
+      targetFolder: $(Build.ArtifactStagingDirectory)
     displayName: 'Copy Build'
  
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: '$(Build.ArtifactStagingDirectory)/npm'
-      artifactName: npm
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 
     displayName: 'Publish build artifact'
     
