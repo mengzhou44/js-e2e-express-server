@@ -41,7 +41,7 @@ jobs:
 
   - task: CopyFiles@2
     inputs:
-      sourceFolder: '$(Build.SourcesDirectory)/dist'
+      sourceFolder: $(Build.SourcesDirectory)
       contents: '**/dist/**' 
       targetFolder: $(Build.StagingDirectory)
     displayName: 'Copy dist fles'
