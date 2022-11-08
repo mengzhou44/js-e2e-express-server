@@ -25,14 +25,14 @@ jobs:
       npm run build
     displayName: 'Install dependencies and run build'
  
-   - task: CopyFiles@2
+  - task: CopyFiles@2
     inputs:
       sourceFolder: $(Build.SourcesDirectory)
       contents: 'package.json' 
       targetFolder: $(Build.StagingDirectory)
     displayName: 'Copy package.json'
 
-   - task: CopyFiles@2
+  - task: CopyFiles@2
     inputs:
       sourceFolder: $(Build.SourcesDirectory)
       contents: 'package-lock.json' 
