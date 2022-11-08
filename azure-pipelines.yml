@@ -32,6 +32,6 @@ jobs:
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)/npm'
-      artifactName: app
+      artifactName: npm
     displayName: 'Publish build artifact'
     
