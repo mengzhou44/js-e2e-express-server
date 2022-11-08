@@ -11,6 +11,8 @@ pool:
 
 variables:
   outputFolder: $(Build.SourcesDirectory)/dist
+  environment: 'development' 
+  releaseDate: $(Get-Date -Format yyyy-MM-dd)
 
 jobs:
 - job: build
@@ -23,15 +25,15 @@ jobs:
   - script: |
       npm install
       npm run build
-    displayName: 'npm install and build'
+    displayName: 'Install dependencies and run build'
  
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: $(outputFolder)
       includeRootFolder: true 
       archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
-    displayName: 'create build artifacts'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(environment)-$(releaseDate)-$(Build.BuildId).zip' 
+    displayName: 'Create build artifacts'
   
   - task: PublishPipelineArtifact@1
     inputs:
