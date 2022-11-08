@@ -43,8 +43,8 @@ jobs:
     inputs:
       sourceFolder: '$(Build.SourcesDirectory)/dist'
       contents: '**/dist/**' 
-      targetFolder: '$(Build.StagingDirectory)/dist'
-    displayName: 'Copy dist folder'
+      targetFolder: $(Build.StagingDirectory)
+    displayName: 'Copy dist fles'
     
   - task: ArchiveFiles@2
     inputs:
