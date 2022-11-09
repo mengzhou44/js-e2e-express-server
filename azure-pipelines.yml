@@ -61,3 +61,10 @@ jobs:
       artifactName: seaboard-api
     displayName: 'Publish build artifact'
   
+- job: 'Tagbuild'
+  steps: 
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |    
+        echo 'Hello world'
