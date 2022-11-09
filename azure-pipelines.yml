@@ -65,8 +65,9 @@ jobs:
   dependsOn: build
   condition: succeeded()
   steps: 
-  - script: |
-      echo ID: $(Build.BuildId)
-      echo Number: $(Build.BuildNumber)
-      echo ##vso[build.addbuildtag]$(ENVIRONMENT)
-      echo ##vso[build.updatebuildnumber]$(Build.BuildNumber)-$(ENVIRONMENT)
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |    
+        Write-Host "##vso[build.addbuildtag]$(ENVIRONMENT)"
+    displayName: 'Tag the build'
