@@ -67,3 +67,4 @@ jobs:
   steps: 
   - script: |
       echo ##vso[build.addbuildtag]$(ENVIRONMENT)
+      echo ##vso[build.updatebuildnumber]$(Build.BuildNumber)-$(ENVIRONMENT)
