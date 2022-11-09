@@ -25,7 +25,13 @@ jobs:
       npm install
       npm run build
     displayName: 'Install dependencies and run build'
- 
+
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |    
+        Write-Host "##vso[build.addbuildtag]$(ENVIRONMENT)"
+    displayName: 'Tag the build' 
   - task: CopyFiles@2
     inputs:
       sourceFolder: $(Build.SourcesDirectory)
@@ -60,14 +66,3 @@ jobs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
       artifactName: seaboard-api
     displayName: 'Publish build artifact'
-  
-- job: 'tag'
-  dependsOn: build
-  condition: succeeded()
-  steps: 
-  - task: PowerShell@2
-    inputs:
-      targetType: 'inline'
-      script: |    
-        Write-Host "##vso[build.addbuildtag]$(ENVIRONMENT)"
-    displayName: 'Tag the build'
