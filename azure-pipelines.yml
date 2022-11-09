@@ -65,9 +65,5 @@ jobs:
   dependsOn: build
   condition: succeeded()
   steps: 
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: |    
-         echo ##vso[build.addbuildtag]$(ENVIRONMENT)
-         echo ##vso[build.addbuildtag]$(Build.SourceVersion)
+  - script: |
+      echo ##vso[build.addbuildtag]$(ENVIRONMENT)
