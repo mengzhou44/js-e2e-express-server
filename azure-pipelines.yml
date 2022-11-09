@@ -61,10 +61,13 @@ jobs:
       artifactName: seaboard-api
     displayName: 'Publish build artifact'
   
-- job: 'Tagbuild'
+- job: 'tag'
+  dependsOn: build
+  condition: succeeded()
   steps: 
   - task: Bash@3
     inputs:
       targetType: 'inline'
       script: |    
-        echo 'Hello world'
+         echo ##vso[build.addbuildtag]$(ENVIRONMENT)
+         echo ##vso[build.addbuildtag]$(Build.SourceVersion)
