@@ -66,5 +66,7 @@ jobs:
   condition: succeeded()
   steps: 
   - script: |
+      echo ID: $(Build.BuildId)
+      echo Number: $(Build.BuildNumber)
       echo ##vso[build.addbuildtag]$(ENVIRONMENT)
       echo ##vso[build.updatebuildnumber]$(Build.BuildNumber)-$(ENVIRONMENT)
